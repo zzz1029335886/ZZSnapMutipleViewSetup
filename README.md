@@ -3,6 +3,45 @@ Use snapKit setup mutiple views on one line
 
 One line layout subviews by Snapkit
 
+enum Style {
+        enum LayoutType {
+            case horizontal
+            case vertical
+            case equalSize(
+                _ countInLine: Int = 1,
+                _ itemHeight: CGFloat? = nil,
+                _ lastBottomPriority: ConstraintPriority = .required
+            )
+        }
+        
+        enum Alignment {
+            case left(_ padding: CGFloat = 0)
+            case right(_ padding: CGFloat = 0)
+            case top(_ padding: CGFloat = 0)
+            case bottom(_ padding: CGFloat = 0)
+            case center(_ padding: CGFloat = 0)
+        }
+        
+        case showType(_ type: LayoutType)
+        case horizontalSpace(_ space: CGFloat? = 0)
+        case verticalSpace(_ space: CGFloat? = 0)
+        
+        /// Invalid for 'showType' is 'equalSize'
+        case alignment(_ alignment: Alignment)
+        /// Invalid for 'showType' is 'equalSize'
+        case alignments(_ alignments: [Alignment])
+                
+        /// height for self
+        case height(_ height: CGFloat)
+        /// width for self
+        case width(_ width: CGFloat)
+        
+        /// 'insets' with case 'insetsModel', The last value is valid
+        case insets(top: CGFloat? = nil, left: CGFloat? = nil, bottom: CGFloat? = nil, right: CGFloat? = nil)
+        /// 'insetsModel' with case 'insets', The last value is valid
+        case insetsModel(insets: ZZSnapMutipleViewSetup.Insets)
+    }
+
 example: 
   
   view.zz_setupSubViews(getLabels(count: 10), .showType(.equalSize(3, 30)), .horizontalSpace(8), .verticalSpace(8), .insetsModel(insets: .init(all: 10)))
