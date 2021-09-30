@@ -57,6 +57,10 @@
 		D47F837D2706000100BA589D /* FlexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F837C2706000100BA589D /* FlexViewController.swift */; };
 		D47F837F2706292F00BA589D /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F837E2706292F00BA589D /* WidgetViewController.swift */; };
 		D47F83812706368900BA589D /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F83802706368900BA589D /* MoreViewController.swift */; };
+		D47F838727064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.48.26.png in Resources */ = {isa = PBXBuildFile; fileRef = D47F838327064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.48.26.png */; };
+		D47F838827064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png in Resources */ = {isa = PBXBuildFile; fileRef = D47F838427064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png */; };
+		D47F838927064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png in Resources */ = {isa = PBXBuildFile; fileRef = D47F838527064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png */; };
+		D47F838A27064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png in Resources */ = {isa = PBXBuildFile; fileRef = D47F838627064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +116,10 @@
 		D47F837C2706000100BA589D /* FlexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexViewController.swift; sourceTree = "<group>"; };
 		D47F837E2706292F00BA589D /* WidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		D47F83802706368900BA589D /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		D47F838327064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.48.26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.48.26.png"; sourceTree = "<group>"; };
+		D47F838427064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png"; sourceTree = "<group>"; };
+		D47F838527064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png"; sourceTree = "<group>"; };
+		D47F838627064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +152,7 @@
 		D47F830B270596D700BA589D /* ZZSnapMutipleViewSetup */ = {
 			isa = PBXGroup;
 			children = (
+				D47F838227064E0100BA589D /* Pictures */,
 				D47F836A2705AE5500BA589D /* Classes */,
 				D47F83252705A20900BA589D /* SnapKit */,
 				D47F83202705974B00BA589D /* SnapMutipleViewSetup */,
@@ -247,6 +256,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D47F838227064E0100BA589D /* Pictures */ = {
+			isa = PBXGroup;
+			children = (
+				D47F838327064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.48.26.png */,
+				D47F838427064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png */,
+				D47F838627064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png */,
+				D47F838527064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png */,
+			);
+			path = Pictures;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -305,7 +325,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47F838927064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png in Resources */,
+				D47F838827064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png in Resources */,
+				D47F838A27064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png in Resources */,
 				D47F8319270596DB00BA589D /* LaunchScreen.storyboard in Resources */,
+				D47F838727064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.48.26.png in Resources */,
 				D47F8316270596DB00BA589D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
