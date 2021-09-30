@@ -70,3 +70,12 @@ example:
       .alignment(.bottom(10)),
       .height(100)
   )
+    
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2003.48.26.png" width="390" height="844" />
+
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2003.51.36.png" width="390" height="844" />
+
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2003.52.17.png" width="390" height="844" />
+
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2003.52.34.png" width="390" height="844" />
+
