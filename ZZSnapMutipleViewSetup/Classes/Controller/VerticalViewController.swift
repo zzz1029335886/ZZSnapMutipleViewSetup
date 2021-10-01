@@ -13,7 +13,14 @@ class VerticalViewController: ViewController {
         super.viewDidLoad()
         
         scrollView.zz_setupSubViews(
-            [getTitleLabel("左对齐:10,第2个右对齐并加内边距").zz_flexView.zz_insets(insets: .init(all: 10)), view0, getTitleLabel("垂直对齐"), view1, getTitleLabel("右对齐10"), view2],
+            [
+                getTitleLabel("左对齐:10,第2个右对齐并加内边距").zz_flexView.zz_insets(insets: .init(all: 10)),
+                view0,
+                getTitleLabel("垂直对齐"),
+                view1,
+                getTitleLabel("右对齐10"),
+                view2
+            ],
             .showType(.vertical),
             .insets(top: nil, left: 20, bottom: 100, right: 20),
             .alignment(.center(0)), .alignment(.left(10))
