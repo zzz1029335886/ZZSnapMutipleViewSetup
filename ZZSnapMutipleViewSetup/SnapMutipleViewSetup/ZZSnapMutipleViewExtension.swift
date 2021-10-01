@@ -589,8 +589,10 @@ extension UIView{
         }
         
         if let alignmentView = subView as? ZZSnapMutipleViewSetupAlignment {
-            isBool = true
-            zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView)
+            if !alignmentView.alignments.isEmpty {
+                isBool = true
+                zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView)
+            }    
         }
         
         if let flexView = subView as? ZZSnapMutipleViewSetupFlex{
@@ -621,7 +623,7 @@ extension UIView{
         }
         
         if let spaceView = subView as? ZZSnapMutipleViewSetupSpace{
-            isBool = true
+            isBool = spaceView.isIgnore
             if let zz_width = spaceView.zz_width {
                 spaceView.snp.makeConstraints { make in
                     make.width.equalTo(zz_width)

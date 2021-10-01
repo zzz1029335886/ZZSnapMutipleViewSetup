@@ -97,6 +97,7 @@ struct ZZSnapMutipleViewSetup {
         var zz_contentView: UIView?
     }
     class SpaceView: UIView, ZZSnapMutipleViewSetupSpace {
+        var isIgnore: Bool = true
         var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
         var insets: ZZSnapMutipleViewSetup.Insets = .zero
         var zz_contentView: UIView?
@@ -146,6 +147,8 @@ extension ZZSnapMutipleViewSetupContain{
 
 /// 空间view，指定宽度和高度，常用于占位
 protocol ZZSnapMutipleViewSetupSpace: ZZSnapMutipleViewSetupAlignment {
+    /// 是否忽略insets，alignment
+    var isIgnore: Bool {set get}
     /// 宽度
     var zz_width: CGFloat? {set get}
     /// 高度
@@ -252,27 +255,31 @@ extension UIView{
     
     static func zz_spaceView(
         width: CGFloat? = nil,
-        height: CGFloat? = nil
+        height: CGFloat? = nil,
+        isIgnore: Bool = true
     ) -> ZZSnapMutipleViewSetup.SpaceView{
         let spaceView = ZZSnapMutipleViewSetup.SpaceView()
         spaceView.zz_width = width
         spaceView.zz_height = height
+        spaceView.isIgnore = isIgnore
         return spaceView
     }
     
     func zz_spaceView(
         width: CGFloat? = nil,
-        height: CGFloat? = nil
+        height: CGFloat? = nil,
+        isIgnore: Bool = true
     ) -> ZZSnapMutipleViewSetup.SpaceView{
-        return .zz_spaceContainView(self, width: width, height: height)
+        return .zz_spaceContainView(self, width: width, height: height, isIgnore: isIgnore)
     }
     
     static func zz_spaceContainView(
         _ view: UIView,
         width: CGFloat? = nil,
-        height: CGFloat? = nil
+        height: CGFloat? = nil,
+        isIgnore: Bool = true
     ) -> ZZSnapMutipleViewSetup.SpaceView {
-        let spaceView = zz_spaceView(width: width, height: height)
+        let spaceView = zz_spaceView(width: width, height: height, isIgnore: isIgnore)
         spaceView.zz_contentView = view
         spaceView.judgContainView()
         return spaceView
