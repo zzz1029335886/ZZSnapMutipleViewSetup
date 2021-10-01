@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         
         override func layoutSubviews() {
             super.layoutSubviews()
-         
+            
             return
             let realWidth = Int(self.bounds.width)
             let realHeight = Int(self.bounds.height)
@@ -74,8 +74,11 @@ class ViewController: UIViewController {
     ) -> UIView {
         let view = UIView()
         
-        let width = Int(arc4random() % UInt32(maxWidth - minWidth)) + Int(minWidth)
-        let height = Int(arc4random() % UInt32(maxHeight - minHeight)) + Int(minHeight)
+        let w = maxWidth - minWidth
+        let h = maxHeight - minHeight
+        
+        let width = w == 0 ? Int(maxWidth) : Int(arc4random() % UInt32(w)) + Int(minWidth)
+        let height = h == 0 ? Int(maxHeight) : Int(arc4random() % UInt32(h)) + Int(minHeight)
         
         let label = getTitleLabel("\(width)x\(height)")
         label.zz_width = width

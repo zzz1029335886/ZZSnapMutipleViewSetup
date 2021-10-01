@@ -61,6 +61,9 @@
 		D47F838827064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png in Resources */ = {isa = PBXBuildFile; fileRef = D47F838427064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png */; };
 		D47F838927064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png in Resources */ = {isa = PBXBuildFile; fileRef = D47F838527064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png */; };
 		D47F838A27064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png in Resources */ = {isa = PBXBuildFile; fileRef = D47F838627064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png */; };
+		D4C3E6B02706EF3D0060EF7F /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E6AF2706EF3D0060EF7F /* Extension.swift */; };
+		D4C3E6B227071DA10060EF7F /* ScrollVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E6B127071DA10060EF7F /* ScrollVerticalViewController.swift */; };
+		D4C3E6B427071DC20060EF7F /* ScrollHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E6B327071DC20060EF7F /* ScrollHorizontalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +123,9 @@
 		D47F838427064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.51.36.png"; sourceTree = "<group>"; };
 		D47F838527064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.34.png"; sourceTree = "<group>"; };
 		D47F838627064E2200BA589D /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 03.52.17.png"; sourceTree = "<group>"; };
+		D4C3E6AF2706EF3D0060EF7F /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		D4C3E6B127071DA10060EF7F /* ScrollVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollVerticalViewController.swift; sourceTree = "<group>"; };
+		D4C3E6B327071DC20060EF7F /* ScrollHorizontalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollHorizontalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,7 @@
 				D47F83202705974B00BA589D /* SnapMutipleViewSetup */,
 				D47F830C270596D700BA589D /* AppDelegate.swift */,
 				D47F8310270596D700BA589D /* ViewController.swift */,
+				D4C3E6AF2706EF3D0060EF7F /* Extension.swift */,
 				D47F8315270596DB00BA589D /* Assets.xcassets */,
 				D47F8317270596DB00BA589D /* LaunchScreen.storyboard */,
 				D47F831A270596DB00BA589D /* Info.plist */,
@@ -242,6 +249,8 @@
 				D47F83782705EA2700BA589D /* VerticalViewController.swift */,
 				D47F837A2705F65900BA589D /* HorizontalViewController.swift */,
 				D47F837C2706000100BA589D /* FlexViewController.swift */,
+				D4C3E6B327071DC20060EF7F /* ScrollHorizontalViewController.swift */,
+				D4C3E6B127071DA10060EF7F /* ScrollVerticalViewController.swift */,
 				D47F837E2706292F00BA589D /* WidgetViewController.swift */,
 				D47F83802706368900BA589D /* MoreViewController.swift */,
 			);
@@ -352,6 +361,7 @@
 				D47F83592705A20900BA589D /* ConstraintLayoutSupport.swift in Sources */,
 				D47F8311270596D700BA589D /* ViewController.swift in Sources */,
 				D47F83602705A20900BA589D /* ConstraintLayoutGuideDSL.swift in Sources */,
+				D4C3E6B427071DC20060EF7F /* ScrollHorizontalViewController.swift in Sources */,
 				D47F83492705A20900BA589D /* LayoutConstraintItem.swift in Sources */,
 				D47F83792705EA2700BA589D /* VerticalViewController.swift in Sources */,
 				D47F835C2705A20900BA589D /* ConstraintOffsetTarget.swift in Sources */,
@@ -362,6 +372,7 @@
 				D47F83642705A20900BA589D /* Debugging.swift in Sources */,
 				D47F837B2705F65900BA589D /* HorizontalViewController.swift in Sources */,
 				D47F835E2705A20900BA589D /* ConstraintMaker.swift in Sources */,
+				D4C3E6B227071DA10060EF7F /* ScrollVerticalViewController.swift in Sources */,
 				D47F83812706368900BA589D /* MoreViewController.swift in Sources */,
 				D47F830D270596D700BA589D /* AppDelegate.swift in Sources */,
 				D47F83612705A20900BA589D /* ConstraintView+Extensions.swift in Sources */,
@@ -376,6 +387,7 @@
 				D47F83532705A20900BA589D /* ConstraintPriority.swift in Sources */,
 				D47F83522705A20900BA589D /* ConstraintMakerExtendable.swift in Sources */,
 				D47F835B2705A20900BA589D /* ConstraintConstantTarget.swift in Sources */,
+				D4C3E6B02706EF3D0060EF7F /* Extension.swift in Sources */,
 				D47F83542705A20900BA589D /* ConstraintInsetTarget.swift in Sources */,
 				D47F837D2706000100BA589D /* FlexViewController.swift in Sources */,
 				D47F83242705982D00BA589D /* ZZSnapMutipleViewExtension.swift in Sources */,

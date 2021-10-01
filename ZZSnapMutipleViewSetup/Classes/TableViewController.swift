@@ -13,8 +13,10 @@ class TableViewController: UITableViewController {
         TableListItem(name: "Vertical", controllerClass: VerticalViewController.self),
         TableListItem(name: "Horizontal", controllerClass: HorizontalViewController.self),
         TableListItem(name: "Flex", controllerClass: FlexViewController.self),
-        TableListItem(name: "Widget", controllerClass: WidgetViewController.self),
+//        TableListItem(name: "Widget", controllerClass: WidgetViewController.self),
         TableListItem(name: "More", controllerClass: MoreViewController.self),
+        TableListItem(name: "ScrollHorizontal", controllerClass: ScrollHorizontalViewController.self),
+        TableListItem(name: "ScrollVertical", controllerClass: ScrollVerticalViewController.self),
     ]
     
     override func viewDidLoad() {

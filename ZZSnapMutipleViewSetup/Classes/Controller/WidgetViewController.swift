@@ -23,7 +23,7 @@ class WidgetViewController: ViewController {
         
         
         view1.zz_setupSubViews(
-            getRandomSizeViews(count: 3, maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 70, minHeight: 30).compactMap{ $0.zz_widget(CGFloat($0.tag + 1)) },
+            getRandomSizeViews(count: 3, maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 70, minHeight: 30),
             .showType(.horizontal),
             .alignment(.bottom(10)),
             .horizontalSpace(0),

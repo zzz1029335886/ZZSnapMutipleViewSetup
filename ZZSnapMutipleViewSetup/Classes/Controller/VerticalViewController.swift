@@ -13,9 +13,9 @@ class VerticalViewController: ViewController {
         super.viewDidLoad()
         
         scrollView.zz_setupSubViews(
-            [getTitleLabel("左对齐:10,第2个右对齐并加内边距").zz_flexView(insets: .init(all: 10)), view0, getTitleLabel("垂直对齐"), view1, getTitleLabel("右对齐10"), view2],
+            [getTitleLabel("左对齐:10,第2个右对齐并加内边距").zz_flexView.zz_insets(insets: .init(all: 10)), view0, getTitleLabel("垂直对齐"), view1, getTitleLabel("右对齐10"), view2],
             .showType(.vertical),
-            .insets(top: 108, left: 20, bottom: nil, right: 20),
+            .insets(top: nil, left: 20, bottom: 100, right: 20),
             .alignment(.center(0)), .alignment(.left(10))
         )
         
@@ -26,7 +26,7 @@ class VerticalViewController: ViewController {
             maxHeight: 50,
             minHeight: 20
         )
-        views0[2] = .zz_alignmentView(views0[2], insets: .init(all: 10), alignments: .right(10))
+        views0[2] = .zz_alignmentContainView(views0[2], alignments: .right(10), .top(), .bottom())
         
         view0.zz_setupSubViews(
             views0,

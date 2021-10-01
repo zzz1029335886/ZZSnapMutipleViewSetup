@@ -30,7 +30,7 @@ struct ZZSnapMutipleViewSetup {
             right = all
         }
         
-        init(horizontal: CGFloat?, vertical: CGFloat?) {
+        init(horizontal: CGFloat? = nil, vertical: CGFloat? = nil) {
             top = vertical
             bottom = vertical
             right = horizontal
@@ -45,11 +45,8 @@ struct ZZSnapMutipleViewSetup {
     
     enum Style {
         enum LayoutType {
-            /// 水平
             case horizontal
-            /// 垂直
             case vertical
-            /// 宽度相同
             case equalSize(
                 _ countInLine: Int = 1,
                 _ itemHeight: CGFloat? = nil,
@@ -57,24 +54,27 @@ struct ZZSnapMutipleViewSetup {
             )
         }
         
-        /// 对齐方式
         enum Alignment {
             case left(_ padding: CGFloat = 0)
             case right(_ padding: CGFloat = 0)
             case top(_ padding: CGFloat = 0)
             case bottom(_ padding: CGFloat = 0)
             case center(_ padding: CGFloat = 0)
+            case equal(_ insets: ZZSnapMutipleViewSetup.Insets = .zero)
         }
         
         case showType(_ type: LayoutType)
+        
+        /// nil is autoSpace, default is nil
         case horizontalSpace(_ space: CGFloat? = 0)
+        /// nil is autoSpace, default is nil
         case verticalSpace(_ space: CGFloat? = 0)
         
         /// Invalid for 'showType' is 'equalSize'
         case alignment(_ alignment: Alignment)
         /// Invalid for 'showType' is 'equalSize'
         case alignments(_ alignments: [Alignment])
-                
+        
         /// height for self
         case height(_ height: CGFloat)
         /// width for self
@@ -87,25 +87,27 @@ struct ZZSnapMutipleViewSetup {
     }
     
     class FlexView: UIView, ZZSnapMutipleViewSetupFlex {
-        var insets: ZZSnapMutipleViewSetup.Insets?
+        var insets: ZZSnapMutipleViewSetup.Insets = .zero
+        var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
         var zz_contentView: UIView?
     }
     class SpaceView: UIView, ZZSnapMutipleViewSetupSpace {
-        var insets: ZZSnapMutipleViewSetup.Insets?
+        var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
+        var insets: ZZSnapMutipleViewSetup.Insets = .zero
         var zz_contentView: UIView?
         var zz_width: CGFloat?
         var zz_height: CGFloat?
     }
     class AlignmentView: UIView, ZZSnapMutipleViewSetupAlignment {
+        var insets: ZZSnapMutipleViewSetup.Insets = .zero
         var zz_contentView: UIView?
-        var insets: ZZSnapMutipleViewSetup.Insets?
         var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
     }
 }
 
 protocol ZZSnapMutipleViewSetupContain: UIView {
     var zz_contentView: UIView? {set get}
-    var insets: ZZSnapMutipleViewSetup.Insets? {set get}
+    var insets: ZZSnapMutipleViewSetup.Insets {set get}
     func setup()
 }
 
@@ -119,13 +121,28 @@ extension ZZSnapMutipleViewSetupContain{
         guard let zz_contentView = zz_contentView else { return }
         addSubview(zz_contentView)
         zz_contentView.snp.makeConstraints { make in
-            make.edges.equalTo(insets?.edgeInsets ?? .zero)
+            make.edges.equalTo(insets.edgeInsets)
         }
+    }
+    
+    func judgContainView() {
+        guard let containView = zz_contentView as? ZZSnapMutipleViewSetupContain else { return }
+        containView.setup()
+    }
+    
+    func zz_insets(
+        insets: ZZSnapMutipleViewSetup.Insets = .zero
+    ) -> Self{
+        self.insets = insets
+        return self
     }
 }
 
-protocol ZZSnapMutipleViewSetupSpace: ZZSnapMutipleViewSetupContain {
+/// 空间view，指定宽度和高度，常用于占位
+protocol ZZSnapMutipleViewSetupSpace: ZZSnapMutipleViewSetupAlignment {
+    /// 宽度
     var zz_width: CGFloat? {set get}
+    /// 高度
     var zz_height: CGFloat? {set get}
 }
 
@@ -133,76 +150,125 @@ extension ZZSnapMutipleViewSetupSpace{
     func setup() {
         setupContain()
         
+        if let zz_width = zz_width {
+            snp.makeConstraints { make in
+                make.width.equalTo(zz_width)
+            }
+        }
+        if let zz_height = zz_height {
+            snp.makeConstraints { make in
+                make.height.equalTo(zz_height)
+            }
+        }
     }
 }
-protocol ZZSnapMutipleViewSetupFlex: ZZSnapMutipleViewSetupContain {}
+
+/// 伸缩view，忽视alignment
+protocol ZZSnapMutipleViewSetupFlex: ZZSnapMutipleViewSetupAlignment {}
 protocol ZZSnapMutipleViewSetupAlignment: ZZSnapMutipleViewSetupContain {
     var alignments: [ZZSnapMutipleViewSetup.Style.Alignment]{ set get }
 }
-
-extension UIColor{
-    class var randomColor: UIColor{
-        get{
-            let red = CGFloat(arc4random() % 256) / 255.0
-            let green = CGFloat(arc4random() % 256) / 255.0
-            let blue = CGFloat(arc4random() % 256) / 255.0
-            return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-        }
+extension ZZSnapMutipleViewSetupAlignment{
+    func zz_alignments(
+        alignments: ZZSnapMutipleViewSetup.Style.Alignment...
+    ) -> Self{
+        self.alignments = alignments
+        return self
     }
 }
 
-private struct AssociatedKeys {
-    static var kZZSnapMutipleViewSetupWidget = "kZZSnapMutipleViewSetupWidget"
-}
-
-extension UIView{
-    var zz_widget: CGFloat? {
-        get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.kZZSnapMutipleViewSetupWidget) as? CGFloat
-        }
-        set {
-            objc_setAssociatedObject(self, &AssociatedKeys.kZZSnapMutipleViewSetupWidget, newValue, .OBJC_ASSOCIATION_ASSIGN)
-        }
-    }
-}
+//private struct AssociatedKeys {
+//    static var kZZSnapMutipleViewSetupWidget = "kZZSnapMutipleViewSetupWidget"
+//}
+//
+//extension UIView{
+//    var zz_widget: CGFloat? {
+//        get {
+//            return objc_getAssociatedObject(self, &AssociatedKeys.kZZSnapMutipleViewSetupWidget) as? CGFloat
+//        }
+//        set {
+//            objc_setAssociatedObject(self, &AssociatedKeys.kZZSnapMutipleViewSetupWidget, newValue, .OBJC_ASSOCIATION_ASSIGN)
+//        }
+//    }
+//}
 
 extension UIView{
     
-    func zz_widget(_ widget: CGFloat) -> Self {
-        self.zz_widget = widget
-        return self
-    }
+    //    func zz_widget(_ widget: CGFloat) -> Self {
+    //        self.zz_widget = widget
+    //        return self
+    //    }
     
     static var zz_flexView: ZZSnapMutipleViewSetup.FlexView{
         return ZZSnapMutipleViewSetup.FlexView()
     }
     
-    func zz_flexView(insets: ZZSnapMutipleViewSetup.Insets? = nil) -> ZZSnapMutipleViewSetup.FlexView{
-        return UIView.zz_flexView(self, insets: insets)
+    var zz_flexView: ZZSnapMutipleViewSetup.FlexView{
+        return .zz_flexContainView(self)
     }
     
-    static func zz_flexView(_ view: UIView, insets: ZZSnapMutipleViewSetup.Insets? = nil) -> ZZSnapMutipleViewSetup.FlexView{
+    static func zz_flexContainView(
+        _ view: UIView
+    ) -> ZZSnapMutipleViewSetup.FlexView{
         let flexView = zz_flexView
         flexView.zz_contentView = view
-        flexView.insets = insets
+        flexView.judgContainView()
         return flexView
     }
     
-    static func zz_alignmentView(_ view: UIView, insets: ZZSnapMutipleViewSetup.Insets? = nil, alignments: ZZSnapMutipleViewSetup.Style.Alignment...) -> ZZSnapMutipleViewSetup.AlignmentView {
+    fileprivate
+    static func zz_alignmentContainView(
+        _ view: UIView,
+        alignments: [ZZSnapMutipleViewSetup.Style.Alignment]
+    ) -> ZZSnapMutipleViewSetup.AlignmentView {
+        
         let alignmentView = ZZSnapMutipleViewSetup.AlignmentView()
         alignmentView.alignments = alignments
         alignmentView.zz_contentView = view
-        alignmentView.insets = insets
+        alignmentView.judgContainView()
         return alignmentView
     }
     
-    static func zz_spaceView(_ view: UIView, insets: ZZSnapMutipleViewSetup.Insets? = nil, width: CGFloat? = nil, height: CGFloat? = nil) -> ZZSnapMutipleViewSetup.SpaceView {
+    func zz_alignmentView(
+        alignments: ZZSnapMutipleViewSetup.Style.Alignment...
+    ) -> ZZSnapMutipleViewSetup.AlignmentView{
+        return .zz_alignmentContainView(self, alignments: alignments)
+    }
+    
+    static func zz_alignmentContainView(
+        _ view: UIView,
+        alignments: ZZSnapMutipleViewSetup.Style.Alignment...
+    ) -> ZZSnapMutipleViewSetup.AlignmentView {
+        return .zz_alignmentContainView(view, alignments: alignments)
+    }
+    
+    
+    
+    static func zz_spaceView(
+        width: CGFloat? = nil,
+        height: CGFloat? = nil
+    ) -> ZZSnapMutipleViewSetup.SpaceView{
         let spaceView = ZZSnapMutipleViewSetup.SpaceView()
         spaceView.zz_width = width
         spaceView.zz_height = height
+        return spaceView
+    }
+    
+    func zz_spaceView(
+        width: CGFloat? = nil,
+        height: CGFloat? = nil
+    ) -> ZZSnapMutipleViewSetup.SpaceView{
+        return .zz_spaceContainView(self, width: width, height: height)
+    }
+    
+    static func zz_spaceContainView(
+        _ view: UIView,
+        width: CGFloat? = nil,
+        height: CGFloat? = nil
+    ) -> ZZSnapMutipleViewSetup.SpaceView {
+        let spaceView = zz_spaceView(width: width, height: height)
         spaceView.zz_contentView = view
-        spaceView.insets = insets
-        
+        spaceView.judgContainView()
         return spaceView
     }
 }
@@ -214,7 +280,17 @@ extension UIView{
     ///   - styles: style
     static func zz_getViewWithSubViews(_ views: [UIView], _ styles: ZZSnapMutipleViewSetup.Style...) -> UIView{
         let view = UIView()
-        view.zz_setupSubViews(views, styles: styles + [.insetsModel(insets: .init(all: .zero))])
+        view.zz_setupSubViews(views, styles: [.insetsModel(insets: .init(all: .zero))] + styles)
+        return view
+    }
+    
+    /// 批量设置子视图
+    /// - Parameters:
+    ///   - views: subviews
+    ///   - styles: style
+    static func zz_getViewWithSubViews<T: UIView>(_ viewClass: T.Type,  views: [UIView], _ styles: ZZSnapMutipleViewSetup.Style...) -> T{
+        let view = viewClass.init()
+        view.zz_setupSubViews(views, styles: [.insetsModel(insets: .init(all: .zero))] + styles)
         return view
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class FlexViewController: ViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,14 +17,28 @@ class FlexViewController: ViewController {
                 getTitleLabel("垂直伸缩"),
                 view0,
                 getTitleLabel("水平伸缩"),
-                view1
+                view1,
+                getTitleLabel("左中右伸缩"),
+                .zz_getViewWithSubViews(
+                    [
+                        .zz_flexView,
+                        getOneRandomSizeView(maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 50, minHeight: 20),
+                        .zz_flexView,
+                        getOneRandomSizeView(maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 50, minHeight: 20),
+                        .zz_flexView
+                    ],
+                    .showType(.horizontal),
+                    .alignment(.center()),
+                    .horizontalSpace(0),
+                    .height(100)
+                ).randomBackgroundColor
             ],
             .showType(.vertical),
-            .insets(top: 108, left: 20, bottom: nil, right: 40),
+            .insets(top: nil, left: 20, bottom: nil, right: 40),
             .alignment(.center()),
             .alignment(.left(10))
         )
-                
+        
         view0.zz_setupSubViews(
             [
                 getOneRandomSizeView(maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 50, minHeight: 20),
@@ -50,5 +64,5 @@ class FlexViewController: ViewController {
         )
     }
     
-
+    
 }

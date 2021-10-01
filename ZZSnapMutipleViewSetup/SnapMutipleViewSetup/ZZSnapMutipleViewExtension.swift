@@ -219,11 +219,17 @@ extension UIView{
         
         var top = self.snp.top
         var firstSpaceView : UIView?
+        var lastFlexView: ZZSnapMutipleViewSetupFlex?
         
         for (index, subView) in subViews.enumerated() {
             addSubview(subView)
             
-            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: true)
+            if let scrollView = subView as? UIScrollView {
+                scrollView.snp.makeConstraints { make in
+                    make.width.equalToSuperview().offset(0).priority(.high)
+                }
+            }
+            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: true, insets: insets, lastFlexView: &lastFlexView)
             
             if index == 0 {
                 subView.snp.makeConstraints { (m) in
@@ -299,11 +305,17 @@ extension UIView{
         
         var left = self.snp.left
         var firstSpaceView : UIView?
+        var lastFlexView: ZZSnapMutipleViewSetupFlex?
         
         for (index, subView) in subViews.enumerated() {
             addSubview(subView)
             
-            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: false)
+            if let scrollView = subView as? UIScrollView {
+                scrollView.snp.makeConstraints { make in
+                    make.height.equalToSuperview().offset(0).priority(.high)
+                }
+            }
+            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: false, insets: insets, lastFlexView: &lastFlexView)
             
             if index == 0 {
                 subView.snp.makeConstraints { (m) in
@@ -352,53 +364,115 @@ extension UIView{
         }
     }
     
-    fileprivate
     func zz_setupSubViewAlignments(
         _ subView: UIView,
         alignments: [ZZSnapMutipleViewSetup.Style.Alignment],
-        isVertical: Bool,
+        isVertical: Bool? = nil,
         insets: ZZSnapMutipleViewSetup.Insets? = .zero,
-        isMustAlignment: Bool = false
+        isMustAlignment: Bool = false,
+        lastFlexView: inout ZZSnapMutipleViewSetupFlex?
     ) {
         
-        if !isMustAlignment, specialConstraints(view: subView, isVertical: isVertical){
+        if !isMustAlignment, specialConstraints(view: subView, isVertical: isVertical, lastFlexView: &lastFlexView){
             return
         }
         
         for alignment in alignments {
             switch alignment {
+            case .equal(let insets):
+                if let top = insets.top {
+                    zz_setupSubViewAlignments(subView, alignments: [.top(top)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView)
+                }
+                if let left = insets.left {
+                    zz_setupSubViewAlignments(subView, alignments: [.left(left)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView)
+                }
+                if let right = insets.right {
+                    zz_setupSubViewAlignments(subView, alignments: [.right(right)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView)
+                }
+                if let bottom = insets.bottom {
+                    zz_setupSubViewAlignments(subView, alignments: [.bottom(bottom)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView)
+                }
             case .top(let padding):
-                if !isVertical {
+                if isVertical == true {
+                    
+                }else{
+                    let topPadding = (insets?.top ?? 0) + padding
+                    
                     subView.snp.makeConstraints { (m) in
-                        m.top.equalToSuperview().inset((insets?.top ?? 0) + padding)
+                        m.top.equalToSuperview().inset(topPadding)
                     }
+                    
+                    if let scrollView = subView as? UIScrollView {
+                        scrollView.contentSize.height += topPadding
+                        scrollView.snp.updateConstraints { make in
+                            make.height.equalToSuperview().offset(-scrollView.contentSize.height).priority(.high)
+                        }
+                    }
+                    
                 }
             case .bottom(let padding):
-                if !isVertical {
+                if isVertical == true {
+                    
+                }else{
+                    let bottomPadding = (insets?.bottom ?? 0) + padding
+                    
                     subView.snp.makeConstraints { (m) in
-                        m.bottom.equalToSuperview().inset((insets?.bottom ?? 0) + padding)
+                        m.bottom.equalToSuperview().inset(bottomPadding)
+                    }
+                    
+                    if let scrollView = subView as? UIScrollView {
+                        scrollView.contentSize.height += bottomPadding
+                        scrollView.snp.updateConstraints { make in
+                            make.height.equalToSuperview().offset(-scrollView.contentSize.height).priority(.high)
+                        }
                     }
                 }
             case .center(let padding):
-                if isVertical {
-                    subView.snp.makeConstraints { (m) in
-                        m.centerX.equalToSuperview().offset(padding)
+                if let isVertical = isVertical {
+                    if isVertical {
+                        subView.snp.makeConstraints { (m) in
+                            m.centerX.equalToSuperview().offset(padding)
+                        }
+                    } else {
+                        subView.snp.makeConstraints { (m) in
+                            m.centerY.equalToSuperview().offset(padding)
+                        }
                     }
                 }else{
                     subView.snp.makeConstraints { (m) in
-                        m.centerY.equalToSuperview().offset(padding)
+                        m.center.equalToSuperview().offset(padding)
                     }
                 }
             case .left(let padding):
-                if isVertical {
+                if isVertical == false {
+                    
+                }else{
+                    let leftPadding = (insets?.left ?? 0) + padding
                     subView.snp.makeConstraints { (m) in
-                        m.left.equalToSuperview().inset((insets?.left ?? 0) + padding)
+                        m.left.equalToSuperview().inset(leftPadding)
+                    }
+                    if let scrollView = subView as? UIScrollView {
+                        scrollView.contentSize.width += leftPadding
+                        scrollView.snp.updateConstraints { make in
+                            make.width.equalToSuperview().offset(-scrollView.contentSize.width).priority(.high)
+                        }
                     }
                 }
             case .right(let padding):
-                if isVertical {
+                if isVertical == false {
+                    
+                }else{
+                    let rightPadding = (insets?.right ?? 0) + padding
+                    
                     subView.snp.makeConstraints { (m) in
-                        m.right.equalToSuperview().inset((insets?.right ?? 0) + padding)
+                        m.right.equalToSuperview().inset(rightPadding)
+                    }
+                    
+                    if let scrollView = subView as? UIScrollView {
+                        scrollView.contentSize.width += rightPadding
+                        scrollView.snp.updateConstraints { make in
+                            make.width.equalToSuperview().offset(-scrollView.contentSize.width).priority(.high)
+                        }
                     }
                 }
             }
@@ -409,26 +483,50 @@ extension UIView{
     fileprivate
     func specialConstraints(
         view subView: UIView,
-        isVertical: Bool
+        isVertical: Bool?,
+        lastFlexView: inout ZZSnapMutipleViewSetupFlex?
     ) -> Bool{
+        var isBool = false
         
         if let containView = subView as? ZZSnapMutipleViewSetupContain{
+            isBool = true
             containView.setup()
         }
         
+        if let alignmentView = subView as? ZZSnapMutipleViewSetupAlignment {
+            isBool = true
+            zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView)
+        }
+        
         if let flexView = subView as? ZZSnapMutipleViewSetupFlex{
-            if isVertical {
-                flexView.snp.makeConstraints { (m) in
-                    m.width.equalToSuperview().priority(.high)
+            isBool = true
+            if let isVertical = isVertical {
+                if isVertical {
+                    flexView.snp.makeConstraints { (m) in
+                        m.width.lessThanOrEqualToSuperview().priority(.high)
+                    }
+                    lastFlexView?.snp.makeConstraints({ make in
+                        make.height.equalTo(flexView)
+                    })
+                }else{
+                    flexView.snp.makeConstraints { (m) in
+                        m.height.lessThanOrEqualToSuperview().priority(.high)
+                    }
+                    lastFlexView?.snp.makeConstraints({ make in
+                        make.width.equalTo(flexView)
+                    })
                 }
             }else{
-                flexView.snp.makeConstraints { (m) in
-                    m.height.equalToSuperview().priority(.high)
+                flexView.snp.makeConstraints { make in
+                    make.size.lessThanOrEqualToSuperview().priority(.high)
                 }
             }
-        }else if let alignmentView = subView as? ZZSnapMutipleViewSetupAlignment {
-            zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true)
-        } else if let spaceView = subView as? ZZSnapMutipleViewSetupSpace{
+            
+            lastFlexView = flexView
+        }
+        
+        if let spaceView = subView as? ZZSnapMutipleViewSetupSpace{
+            isBool = true
             if let zz_width = spaceView.zz_width {
                 spaceView.snp.makeConstraints { make in
                     make.width.equalTo(zz_width)
@@ -439,10 +537,8 @@ extension UIView{
                     make.height.equalTo(zz_height)
                 }
             }
-        }else{
-            return false
         }
         
-        return true
+        return isBool
     }
 }
