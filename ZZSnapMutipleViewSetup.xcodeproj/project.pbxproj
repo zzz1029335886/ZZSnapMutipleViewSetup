@@ -51,7 +51,6 @@
 		D47F836F2705AEA000BA589D /* TableListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F836E2705AEA000BA589D /* TableListItem.swift */; };
 		D47F83722705AF8E00BA589D /* EqualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F83712705AF8E00BA589D /* EqualViewController.swift */; };
 		D47F83752705C30700BA589D /* RandomColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F83742705C30700BA589D /* RandomColorView.swift */; };
-		D47F83772705C5BF00BA589D /* ZZSnapMultipleViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F83762705C5BF00BA589D /* ZZSnapMultipleViewProtocol.swift */; };
 		D47F83792705EA2700BA589D /* VerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F83782705EA2700BA589D /* VerticalViewController.swift */; };
 		D47F837B2705F65900BA589D /* HorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F837A2705F65900BA589D /* HorizontalViewController.swift */; };
 		D47F837D2706000100BA589D /* FlexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F837C2706000100BA589D /* FlexViewController.swift */; };
@@ -67,6 +66,7 @@
 		D4C3E6C027073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.45.24.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C3E6B927073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.45.24.png */; };
 		D4C3E6C127073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.26.04.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C3E6BA27073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.26.04.png */; };
 		D4C3E6C227073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.44.52.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C3E6BB27073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.44.52.png */; };
+		D4C3E6C9270761C30060EF7F /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E6C8270761C30060EF7F /* ScrollViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,7 +116,6 @@
 		D47F836E2705AEA000BA589D /* TableListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableListItem.swift; sourceTree = "<group>"; };
 		D47F83712705AF8E00BA589D /* EqualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualViewController.swift; sourceTree = "<group>"; };
 		D47F83742705C30700BA589D /* RandomColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomColorView.swift; sourceTree = "<group>"; };
-		D47F83762705C5BF00BA589D /* ZZSnapMultipleViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSnapMultipleViewProtocol.swift; sourceTree = "<group>"; };
 		D47F83782705EA2700BA589D /* VerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalViewController.swift; sourceTree = "<group>"; };
 		D47F837A2705F65900BA589D /* HorizontalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalViewController.swift; sourceTree = "<group>"; };
 		D47F837C2706000100BA589D /* FlexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		D4C3E6B927073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.45.24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.45.24.png"; sourceTree = "<group>"; };
 		D4C3E6BA27073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.26.04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.26.04.png"; sourceTree = "<group>"; };
 		D4C3E6BB27073ACF0060EF7F /* Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.44.52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot - iPhone 13 - 2021-10-01 at 20.44.52.png"; sourceTree = "<group>"; };
+		D4C3E6C8270761C30060EF7F /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,7 +183,6 @@
 			children = (
 				D47F83212705981C00BA589D /* ZZSnapMutipleViewSetup.swift */,
 				D47F83232705982D00BA589D /* ZZSnapMutipleViewExtension.swift */,
-				D47F83762705C5BF00BA589D /* ZZSnapMultipleViewProtocol.swift */,
 			);
 			path = SnapMutipleViewSetup;
 			sourceTree = "<group>";
@@ -255,6 +254,7 @@
 				D47F83782705EA2700BA589D /* VerticalViewController.swift */,
 				D47F837A2705F65900BA589D /* HorizontalViewController.swift */,
 				D47F837C2706000100BA589D /* FlexViewController.swift */,
+				D4C3E6C8270761C30060EF7F /* ScrollViewController.swift */,
 				D4C3E6B327071DC20060EF7F /* ScrollHorizontalViewController.swift */,
 				D4C3E6B127071DA10060EF7F /* ScrollVerticalViewController.swift */,
 				D47F837E2706292F00BA589D /* WidgetViewController.swift */,
@@ -405,6 +405,7 @@
 				D47F83242705982D00BA589D /* ZZSnapMutipleViewExtension.swift in Sources */,
 				D47F83582705A20900BA589D /* ConstraintLayoutGuide.swift in Sources */,
 				D47F836F2705AEA000BA589D /* TableListItem.swift in Sources */,
+				D4C3E6C9270761C30060EF7F /* ScrollViewController.swift in Sources */,
 				D47F834A2705A20900BA589D /* ConstraintDescription.swift in Sources */,
 				D47F83662705A20900BA589D /* LayoutConstraint.swift in Sources */,
 				D47F837F2706292F00BA589D /* WidgetViewController.swift in Sources */,
@@ -412,7 +413,6 @@
 				D47F83552705A20900BA589D /* ConstraintConfig.swift in Sources */,
 				D47F834D2705A20900BA589D /* ConstraintViewDSL.swift in Sources */,
 				D47F83512705A20900BA589D /* ConstraintDSL.swift in Sources */,
-				D47F83772705C5BF00BA589D /* ZZSnapMultipleViewProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@ class TableViewController: UITableViewController {
         TableListItem(name: "Flex", controllerClass: FlexViewController.self),
 //        TableListItem(name: "Widget", controllerClass: WidgetViewController.self),
         TableListItem(name: "More", controllerClass: MoreViewController.self),
+        TableListItem(name: "Scroll", controllerClass: ScrollViewController.self),
         TableListItem(name: "ScrollHorizontal", controllerClass: ScrollHorizontalViewController.self),
         TableListItem(name: "ScrollVertical", controllerClass: ScrollVerticalViewController.self),
     ]

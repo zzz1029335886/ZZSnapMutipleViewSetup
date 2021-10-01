@@ -10,6 +10,9 @@ import UIKit
 struct ZZSnapMutipleViewSetup {
     struct Insets {
         static let zero: Insets = .init(top: 0, left: 0, bottom: 0, right: 0)
+        static func with(edgeInsets: UIEdgeInsets) -> Insets {
+            return .init(top: edgeInsets.top, left: edgeInsets.left, bottom: edgeInsets.bottom, right: edgeInsets.right)
+        }
         
         let top: CGFloat?
         let left: CGFloat?
@@ -41,6 +44,8 @@ struct ZZSnapMutipleViewSetup {
             return .init(top: top ?? 0, left: left ?? 0, bottom: bottom ?? 0, right: right ?? 0)
         }
         
+        
+        
     }
     
     enum Style {
@@ -60,7 +65,7 @@ struct ZZSnapMutipleViewSetup {
             case top(_ padding: CGFloat = 0)
             case bottom(_ padding: CGFloat = 0)
             case center(_ padding: CGFloat = 0)
-            case equal(_ insets: ZZSnapMutipleViewSetup.Insets = .zero)
+            case insets(_ insets: ZZSnapMutipleViewSetup.Insets = .zero)
         }
         
         case showType(_ type: LayoutType)
@@ -128,15 +133,7 @@ extension ZZSnapMutipleViewSetupContain{
     func judgContainView() {
         if let containView = zz_contentView as? ZZSnapMutipleViewSetupContain {
             containView.setup()
-            
-//            if let alignmentView = containView as? ZZSnapMutipleViewSetupAlignment,
-//               let zz_contentView = alignmentView.zz_contentView{
-//                var flexView: ZZSnapMutipleViewSetupFlex?
-//                alignmentView.zz_setupSubViewAlignments(containView, alignments: alignmentView.alignments, isVertical: nil, insets: nil, isMustAlignment: false, lastFlexView: &flexView)
-//            }
         }
-        
-        
     }
     
     func zz_insets(

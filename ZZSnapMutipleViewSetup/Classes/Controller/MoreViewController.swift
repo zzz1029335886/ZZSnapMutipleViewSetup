@@ -22,7 +22,7 @@ class MoreViewController: ViewController {
                 ),
                 .zz_alignmentContainView(
                     getTitleLabel("alignmentView：对齐view，相当父view的对齐方式"),
-                    alignments: .equal()
+                    alignments: .insets()
                 ),
                 .zz_alignmentContainView(
                     getOneRandomSizeView(maxWidth: 100, minWidth: 100, maxHeight: 50, minHeight: 50),

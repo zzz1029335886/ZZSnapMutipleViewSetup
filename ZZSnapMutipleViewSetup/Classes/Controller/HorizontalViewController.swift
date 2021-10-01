@@ -16,7 +16,7 @@ class HorizontalViewController: ViewController {
             [
                 .zz_getViewWithSubViews([getTitleLabel("下对齐10")], .alignment(.bottom()), .showType(.horizontal), .height(100)),
                 view0,
-                getTitleLabel("中对齐").zz_alignmentView(alignments: .equal(.init(horizontal: 10, vertical: 10))).zz_spaceView(width: nil, height: 100),
+                getTitleLabel("中对齐").zz_alignmentView(alignments: .insets(.init(horizontal: 10, vertical: 10))).zz_spaceView(width: nil, height: 100),
                 view1,
                 getTitleLabel("上对齐20"),
                 view2
