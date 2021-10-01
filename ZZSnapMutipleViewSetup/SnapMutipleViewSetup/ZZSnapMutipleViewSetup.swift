@@ -126,8 +126,17 @@ extension ZZSnapMutipleViewSetupContain{
     }
     
     func judgContainView() {
-        guard let containView = zz_contentView as? ZZSnapMutipleViewSetupContain else { return }
-        containView.setup()
+        if let containView = zz_contentView as? ZZSnapMutipleViewSetupContain {
+            containView.setup()
+            
+//            if let alignmentView = containView as? ZZSnapMutipleViewSetupAlignment,
+//               let zz_contentView = alignmentView.zz_contentView{
+//                var flexView: ZZSnapMutipleViewSetupFlex?
+//                alignmentView.zz_setupSubViewAlignments(containView, alignments: alignmentView.alignments, isVertical: nil, insets: nil, isMustAlignment: false, lastFlexView: &flexView)
+//            }
+        }
+        
+        
     }
     
     func zz_insets(
