@@ -29,10 +29,10 @@ example:
         .verticalSpace(8)
     )
 
-<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.25.53.png" width=“390px">
-<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.26.04.png" width=“390px">
-<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.25.png" width=“390px">
-<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.42.png" width=“390px">
-<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.52.png" width=“390px">
-<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.24.png" width=“390px">
-<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.45.32.png" width=“390px">
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.25.53.png" width=“390px"/>
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.26.04.png" width=“390px"/>
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.25.png" width=“390px"/>
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.42.png" width=“390px"/>
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.52.png" width=“390px"/>
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.44.24.png" width=“390px"/>
+<img src="https://github.com/zzz1029335886/ZZSnapMutipleViewSetup/blob/master/ZZSnapMutipleViewSetup/Pictures/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202021-10-01%20at%2020.45.32.png" width=“390px"/>
