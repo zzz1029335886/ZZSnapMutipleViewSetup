@@ -1,0 +1,6 @@
+framework module Pods_ZZSnapMutipleViewSetup {
+  umbrella header "Pods-ZZSnapMutipleViewSetup-umbrella.h"
+
+  export *
+  module * { export * }
+}
