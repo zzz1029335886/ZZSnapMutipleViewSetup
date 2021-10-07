@@ -31,10 +31,13 @@ class MoreViewController: ViewController {
                 .zz_alignmentContainView(
                     getOneRandomSizeView(maxWidth: 100, minWidth: 100, maxHeight: 50, minHeight: 50),
                     alignments: .center()
-                ).zz_insets(insets: .init(all: 10)).randomBackgroundColor
+                ).zz_insets(insets: .init(all: 10)).randomBackgroundColor,
+                .zz_alignmentContainView(
+                    getOneRandomSizeView(maxWidth: 100, minWidth: 100, maxHeight: 50, minHeight: 50),
+                    alignments: .left()
+                ).zz_insets(insets: .init(all: 10)).randomBackgroundColor,
             ],
             .showType(.vertical),
-            .alignment(.center()),
             .verticalSpace(0),
             .insetsModel(insets: .init(top: 88))
         )

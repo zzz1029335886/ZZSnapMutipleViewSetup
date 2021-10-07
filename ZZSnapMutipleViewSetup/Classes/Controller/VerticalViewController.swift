@@ -45,7 +45,7 @@ class VerticalViewController: ViewController {
         view1.zz_setupSubViews(
             getRandomSizeViews(count: 5, maxWidth: kScreenWidth * 0.5, minWidth: kScreenWidth * 0.25, maxHeight: 50, minHeight: 20),
             .showType(.vertical),
-            .alignment(.center())
+            .alignment(.center(0))
         )
         
         view2.zz_setupSubViews(

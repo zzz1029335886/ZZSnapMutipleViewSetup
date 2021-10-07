@@ -36,6 +36,7 @@ class HorizontalViewController: ViewController {
             getRandomSizeViews(count: 3, maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 70, minHeight: 30),
             .showType(.horizontal),
             .alignment(.center()),
+            .horizontalSpace(8),
             .height(100)
         )
                 

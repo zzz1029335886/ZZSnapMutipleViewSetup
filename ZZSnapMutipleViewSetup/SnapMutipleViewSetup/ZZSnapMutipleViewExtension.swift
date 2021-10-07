@@ -45,6 +45,9 @@ extension UIView{
                 horizontalSpace = space
             case .verticalSpace(let space):
                 verticalSpace = space
+            case .space(let space):
+                horizontalSpace = space
+                verticalSpace = space
             case .insets(let top, let left, let bottom, let right):
                 insets = .init(top: top, left: left, bottom: bottom, right: right)
             case .insetsModel(let _insets):
@@ -592,7 +595,7 @@ extension UIView{
             if !alignmentView.alignments.isEmpty {
                 isBool = true
                 zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView)
-            }    
+            }
         }
         
         if let flexView = subView as? ZZSnapMutipleViewSetupFlex{

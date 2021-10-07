@@ -52,6 +52,11 @@ struct ZZSnapMutipleViewSetup {
         enum LayoutType {
             case horizontal
             case vertical
+            
+            /// 每个子view的size一样，自适应宽度
+            /// countInLine：每行个数，默认1，为1时效果是垂直布局
+            /// itemHeight：每个view的高度，默认为空，为空表示自适应
+            /// lastBottomPriority：最后一个子view与父的约束，默认为required，为required可约束当前view的高度
             case equalSize(
                 _ countInLine: Int = 1,
                 _ itemHeight: CGFloat? = nil,
@@ -70,6 +75,8 @@ struct ZZSnapMutipleViewSetup {
         
         case showType(_ type: LayoutType)
         
+        /// nil is autoSpace, default is nil
+        case space(_ space: CGFloat? = 0)
         /// nil is autoSpace, default is nil
         case horizontalSpace(_ space: CGFloat? = 0)
         /// nil is autoSpace, default is nil

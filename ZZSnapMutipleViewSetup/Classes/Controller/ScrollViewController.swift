@@ -12,12 +12,12 @@ class ScrollViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let scrollViews =  (0...10).compactMap{
+        let scrollViews =  (0...30).compactMap{
             index -> UIView in
             return .zz_getViewWithSubViews(
                 UIView.self,
                 views: getRandomSizeViews(count: 3),
-                .showType(.vertical)
+                .showType(.horizontal)
             )
         }
                 
