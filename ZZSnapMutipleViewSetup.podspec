@@ -91,7 +91,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "ZZSnapMutipleViewSetup/ZZSnapMutipleViewSetup*"
+# spec.source_files  = "Classes", "ZZMultipleScrollView/MultipleScrollView/**/*.{h,m}"
+  spec.source_files  = "Classes", "ZZSnapMutipleViewSetup/SnapMutipleViewSetup/**/*.swift"
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"

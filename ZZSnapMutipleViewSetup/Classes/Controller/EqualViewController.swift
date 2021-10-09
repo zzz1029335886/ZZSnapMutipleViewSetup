@@ -18,19 +18,22 @@ class EqualViewController: ViewController {
             .verticalSpace(30),
             .alignment(.center()),
             .alignment(.left(10)),
-            .insets(top: 124, left: 30, bottom: nil, right: 30)
+            .insets(top: 124, left: 30, bottom: nil, right: 30),
+            .keyPriority(.low)
         )
         
         view0.zz_setupSubViews(
             getLabels(count: 10),
-            .showType(.equalSize(3, 30, .high)),
+            .showType(.equalSize(3, 30)),
+            .keyPriority(.high),
             .space(8),
             .insetsModel(insets: .init(all: 10))
         )
         
         view1.zz_setupSubViews(
             getLabels(count: 10),
-            .showType(.equalSize(3, 30, .required))
+            .showType(.equalSize(3, 30)),
+            .keyPriority(.required)
         )
         
     }

@@ -31,13 +31,15 @@ extension UIView{
         }
         
         var showType: ZZSnapMutipleViewSetup.Style.LayoutType = .equalSize(1, nil)
-        var horizontalSpace: CGFloat? = nil
-        var verticalSpace: CGFloat? = nil
+        var horizontalSpace: CGFloat? = 0
+        var verticalSpace: CGFloat? = 0
         var insets: ZZSnapMutipleViewSetup.Insets? = nil
         var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
         var height: CGFloat?
         var width: CGFloat?
-        
+        var keyPriority: ConstraintPriority = .required
+        var alignmentPriority: ConstraintPriority = .required
+
         for style in styles {
             switch style {
             case .showType(let type):
@@ -57,10 +59,14 @@ extension UIView{
                 alignments.append(alignment)
             case .alignments(let _alignments):
                 alignments.append(contentsOf: _alignments)
+            case .alignmentPriority(let _priority):
+                alignmentPriority = _priority
             case .height(let _height):
                 height = _height
             case .width(let _width):
                 width = _width
+            case .keyPriority(let _keyPriority):
+                keyPriority = _keyPriority
             }
         }
         
@@ -76,14 +82,14 @@ extension UIView{
         }
         
         switch showType{
-        case .equalSize(let countInLine, let itemHeight, let bottomPriority):
-            zz_setupSubViews(views: views, countInLine: countInLine, itemHeight: itemHeight, horizontalSpace: horizontalSpace ?? 0, verticalSpace: verticalSpace ?? 0, insets: insets, lastBottomPriority: bottomPriority)
+        case .equalSize(let countInLine, let itemHeight):
+            zz_setupSubViews(views: views, countInLine: countInLine, itemHeight: itemHeight, horizontalSpace: horizontalSpace ?? 0, verticalSpace: verticalSpace ?? 0, insets: insets, lastBottomPriority: keyPriority)
             
         case .horizontal:
-            zz_setupHorizontalSubViews(views: views, space: horizontalSpace, alignments: alignments, insets: insets)
+            zz_setupHorizontalSubViews(views: views, space: horizontalSpace, alignments: alignments, insets: insets, rightPriority: keyPriority, alignmentPriority: alignmentPriority)
             
         case .vertical:
-            zz_setupVerticalSubViews(views: views, space: verticalSpace, alignments: alignments, insets: insets)
+            zz_setupVerticalSubViews(views: views, space: verticalSpace, alignments: alignments, insets: insets, bottomPriority: keyPriority, alignmentPriority: alignmentPriority)
         }
     }
     
@@ -228,16 +234,18 @@ extension UIView{
     /// - Parameter alignments: 对齐方式
     func zz_setupVerticalSubViews(
         views subViews: [UIView],
-        space: CGFloat? = nil,
-        alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = [],
-        insets: ZZSnapMutipleViewSetup.Insets? = .zero)
-    {
+        space: CGFloat?,
+        alignments: [ZZSnapMutipleViewSetup.Style.Alignment],
+        insets: ZZSnapMutipleViewSetup.Insets?,
+        bottomPriority: ConstraintPriority,
+        alignmentPriority: ConstraintPriority
+    ) {
         if subViews.count == 0 {
             return
         }
         
         var spaceViews: [UIView]? = nil
-        if space != 0 {
+        if space == nil {
             spaceViews = (0..<subViews.count - 1).compactMap { (index) -> UIView in
                 let view = UIView()
                 view.tag = index
@@ -258,7 +266,7 @@ extension UIView{
                     make.width.equalToSuperview().offset(0).priority(.high)
                 }
             }
-            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: true, insets: insets, lastFlexView: &lastFlexView)
+            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: true, insets: insets, lastFlexView: &lastFlexView, alignmentPriority: alignmentPriority)
             
             if index == 0 {
                 subView.snp.makeConstraints { (m) in
@@ -266,18 +274,18 @@ extension UIView{
                 }
             }else {
                 subView.snp.makeConstraints { (m) in
-                    m.top.equalTo(top)
+                    m.top.equalTo(top).offset(space ?? 0)
                 }
             }
             
             if index == subViews.count - 1{
                 if let bottom = insets?.bottom {
                     subView.snp.makeConstraints { (m) in
-                        m.bottom.equalToSuperview().inset(bottom)
+                        m.bottom.equalToSuperview().inset(bottom).priority(bottomPriority)
                     }
                 }else{
                     subView.snp.makeConstraints { (m) in
-                        m.bottom.equalToSuperview().priority(.low)
+                        m.bottom.equalToSuperview().priority(bottomPriority)
                     }
                 }
                 
@@ -323,16 +331,18 @@ extension UIView{
     /// - Parameter alignments: 对齐方式
     func zz_setupHorizontalSubViews(
         views subViews: [UIView],
-        space: CGFloat? = nil,
-        alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = [],
-        insets: ZZSnapMutipleViewSetup.Insets? = .zero
+        space: CGFloat?,
+        alignments: [ZZSnapMutipleViewSetup.Style.Alignment],
+        insets: ZZSnapMutipleViewSetup.Insets?,
+        rightPriority: ConstraintPriority,
+        alignmentPriority: ConstraintPriority
     ) {
         if subViews.count == 0 {
             return
         }
         
         var spaceViews: [UIView]? = nil
-        if space != 0 {
+        if space == nil {
             spaceViews = (0..<subViews.count - 1).compactMap { (index) -> UIView in
                 let view = UIView()
                 view.tag = index
@@ -353,7 +363,7 @@ extension UIView{
                     make.height.equalToSuperview().offset(0).priority(.high)
                 }
             }
-            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: false, insets: insets, lastFlexView: &lastFlexView)
+            zz_setupSubViewAlignments(subView, alignments: alignments, isVertical: false, insets: insets, lastFlexView: &lastFlexView, alignmentPriority: alignmentPriority)
             
             if index == 0 {
                 subView.snp.makeConstraints { (m) in
@@ -361,18 +371,18 @@ extension UIView{
                 }
             }else {
                 subView.snp.makeConstraints { (m) in
-                    m.left.equalTo(left)
+                    m.left.equalTo(left).offset(space ?? 0)
                 }
             }
             
             if index == subViews.count - 1{
                 if let right = insets?.right {
                     subView.snp.makeConstraints { (m) in
-                        m.right.equalToSuperview().inset(right)
+                        m.right.equalToSuperview().inset(right).priority(rightPriority)
                     }
                 }else{
                     subView.snp.makeConstraints { (m) in
-                        m.right.equalToSuperview().priority(.low)
+                        m.right.equalToSuperview().priority(rightPriority)
                     }
                 }
                 
@@ -418,10 +428,11 @@ extension UIView{
         insets: ZZSnapMutipleViewSetup.Insets? = .zero,
         isMustAlignment: Bool = false,
         lastFlexView: inout ZZSnapMutipleViewSetupFlex?,
-        isRepeat: Bool = false
+        isRepeat: Bool = false,
+        alignmentPriority: ConstraintPriority
     ) {
         
-        if !isMustAlignment, specialConstraints(view: subView, isVertical: isVertical, lastFlexView: &lastFlexView){
+        if !isMustAlignment, specialConstraints(view: subView, isVertical: isVertical, lastFlexView: &lastFlexView, alignmentPriority: alignmentPriority){
             return
         }
         
@@ -441,22 +452,22 @@ extension UIView{
             case .insets(let insets):
                 if let top = insets.top {
                     topPadding += top
-                    zz_setupSubViewAlignments(subView, alignments: [.top(top)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true)
+                    zz_setupSubViewAlignments(subView, alignments: [.top(top)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true, alignmentPriority: alignmentPriority)
                     topAlignment = .top(top)
                 }
                 if let left = insets.left {
                     leftPadding += left
-                    zz_setupSubViewAlignments(subView, alignments: [.left(left)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true)
+                    zz_setupSubViewAlignments(subView, alignments: [.left(left)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true, alignmentPriority: alignmentPriority)
                     leftAlignment = .left(left)
                 }
                 if let right = insets.right {
                     rightPadding = right
-                    zz_setupSubViewAlignments(subView, alignments: [.right(right)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true)
+                    zz_setupSubViewAlignments(subView, alignments: [.right(right)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true, alignmentPriority: alignmentPriority)
                     rightAlignment = .right(right)
                 }
                 if let bottom = insets.bottom {
                     bottomPadding = bottom
-                    zz_setupSubViewAlignments(subView, alignments: [.bottom(bottom)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true)
+                    zz_setupSubViewAlignments(subView, alignments: [.bottom(bottom)], isVertical: isVertical, insets: nil, isMustAlignment: isMustAlignment, lastFlexView: &lastFlexView, isRepeat: true, alignmentPriority: alignmentPriority)
                     bottomAlignment = .bottom(bottom)
                 }
             case .top(let padding):
@@ -467,7 +478,7 @@ extension UIView{
                     topPadding += padding
                     
                     subView.snp.makeConstraints { (m) in
-                        m.top.equalToSuperview().inset(topPadding)
+                        m.top.equalToSuperview().inset(topPadding).priority(alignmentPriority)
                     }
                     
                     if let scrollView = subView as? UIScrollView {
@@ -486,7 +497,7 @@ extension UIView{
                     bottomPadding += padding
                     
                     subView.snp.makeConstraints { (m) in
-                        m.bottom.equalToSuperview().inset(bottomPadding)
+                        m.bottom.equalToSuperview().inset(bottomPadding).priority(alignmentPriority)
                     }
                     
                     if let scrollView = subView as? UIScrollView {
@@ -501,16 +512,16 @@ extension UIView{
                 if let isVertical = isVertical {
                     if isVertical {
                         subView.snp.makeConstraints { (m) in
-                            m.centerX.equalToSuperview().offset(padding)
+                            m.centerX.equalToSuperview().offset(padding).priority(alignmentPriority)
                         }
                     } else {
                         subView.snp.makeConstraints { (m) in
-                            m.centerY.equalToSuperview().offset(padding)
+                            m.centerY.equalToSuperview().offset(padding).priority(alignmentPriority)
                         }
                     }
                 }else{
                     subView.snp.makeConstraints { (m) in
-                        m.center.equalToSuperview().offset(padding)
+                        m.center.equalToSuperview().offset(padding).priority(alignmentPriority)
                     }
                 }
             case .left(let padding):
@@ -520,7 +531,7 @@ extension UIView{
                 }else{
                     leftPadding += padding
                     subView.snp.makeConstraints { (m) in
-                        m.left.equalToSuperview().inset(leftPadding)
+                        m.left.equalToSuperview().inset(leftPadding).priority(alignmentPriority)
                     }
                     if let scrollView = subView as? UIScrollView {
                         scrollView.contentSize.width += leftPadding
@@ -537,7 +548,7 @@ extension UIView{
                     rightPadding += padding
                     
                     subView.snp.makeConstraints { (m) in
-                        m.right.equalToSuperview().inset(rightPadding)
+                        m.right.equalToSuperview().inset(rightPadding).priority(alignmentPriority)
                     }
                     
                     if let scrollView = subView as? UIScrollView {
@@ -559,8 +570,8 @@ extension UIView{
                 if centerAlignment == nil {
                     if leftAlignment == nil, rightAlignment == nil {
                         subView.snp.makeConstraints { make in
-                            make.left.equalToSuperview().inset(leftPadding)
-                            make.right.equalToSuperview().inset(rightPadding)
+                            make.left.equalToSuperview().inset(leftPadding).priority(alignmentPriority)
+                            make.right.equalToSuperview().inset(rightPadding).priority(alignmentPriority)
                         }
                     }
                 }
@@ -568,8 +579,8 @@ extension UIView{
                 if centerAlignment == nil {
                     if topAlignment == nil, bottomAlignment == nil {
                         subView.snp.makeConstraints { make in
-                            make.bottom.equalToSuperview().inset(bottomPadding)
-                            make.top.equalToSuperview().inset(topPadding)
+                            make.bottom.equalToSuperview().inset(bottomPadding).priority(alignmentPriority)
+                            make.top.equalToSuperview().inset(topPadding).priority(alignmentPriority)
                         }
                     }
                 }
@@ -583,7 +594,8 @@ extension UIView{
     func specialConstraints(
         view subView: UIView,
         isVertical: Bool?,
-        lastFlexView: inout ZZSnapMutipleViewSetupFlex?
+        lastFlexView: inout ZZSnapMutipleViewSetupFlex?,
+        alignmentPriority: ConstraintPriority
     ) -> Bool{
         var isBool = false
         
@@ -595,7 +607,7 @@ extension UIView{
         if let alignmentView = subView as? ZZSnapMutipleViewSetupAlignment {
             if !alignmentView.alignments.isEmpty {
                 isBool = true
-                zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView)
+                zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView, alignmentPriority: alignmentPriority)
             }
         }
         

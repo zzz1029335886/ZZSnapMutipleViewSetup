@@ -18,7 +18,8 @@ class ScrollHorizontalViewController: ViewController {
                 UIScrollView.self,
                 views: getRandomSizeViews(count: 10),
                 .showType(.horizontal),
-                .height(100)
+                .height(100),
+                .alignment(.top())
             )
         }
         

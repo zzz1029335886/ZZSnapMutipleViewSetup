@@ -18,7 +18,8 @@ class ScrollVerticalViewController: ViewController {
                 UIScrollView.self,
                 views: getRandomSizeViews(count: 30),
                 .showType(.vertical),
-                .width(100)
+                .width(100),
+                .alignment(.left())
             )
         }
         

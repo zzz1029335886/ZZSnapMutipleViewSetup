@@ -60,8 +60,7 @@ struct ZZSnapMutipleViewSetup {
             /// lastBottomPriority：最后一个子view与父的约束，默认为required，为required可约束当前view的高度
             case equalSize(
                 _ countInLine: Int = 1,
-                _ itemHeight: CGFloat? = nil,
-                _ lastBottomPriority: ConstraintPriority = .required
+                _ itemHeight: CGFloat? = nil
             )
         }
         
@@ -77,17 +76,19 @@ struct ZZSnapMutipleViewSetup {
         case showType(_ type: LayoutType)
         
         /// nil is autoSpace, default is nil
-        case space(_ space: CGFloat? = 0)
+        case space(_ space: CGFloat?)
         /// nil is autoSpace, default is nil
-        case horizontalSpace(_ space: CGFloat? = 0)
+        case horizontalSpace(_ space: CGFloat?)
         /// nil is autoSpace, default is nil
-        case verticalSpace(_ space: CGFloat? = 0)
+        case verticalSpace(_ space: CGFloat?)
         
         /// Invalid for 'showType' is 'equalSize'
         case alignment(_ alignment: Alignment)
         /// Invalid for 'showType' is 'equalSize'
         case alignments(_ alignments: [Alignment])
-        
+        /// All alignment priority
+        case alignmentPriority(_ priority: ConstraintPriority)
+
         /// height for self
         case height(_ height: CGFloat)
         /// width for self
@@ -97,6 +98,9 @@ struct ZZSnapMutipleViewSetup {
         case insets(top: CGFloat? = nil, left: CGFloat? = nil, bottom: CGFloat? = nil, right: CGFloat? = nil)
         /// 'insetsModel' with case 'insets', The last value is valid
         case insetsModel(insets: ZZSnapMutipleViewSetup.Insets)
+        /// Key constraints that determine width and height
+        case keyPriority(_ keyPriority: ConstraintPriority)
+        
     }
     
     class FlexView: UIView, ZZSnapMutipleViewSetupFlex {

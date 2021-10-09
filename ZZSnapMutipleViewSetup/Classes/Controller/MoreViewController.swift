@@ -39,7 +39,8 @@ class MoreViewController: ViewController {
             ],
             .showType(.vertical),
             .verticalSpace(0),
-            .insetsModel(insets: .init(top: 88))
+            .insetsModel(insets: .init(top: 88)),
+            .keyPriority(.low)
         )
         
     }
