@@ -11,6 +11,8 @@ let kScreenWidth = UIScreen.main.bounds.width
 let kScreenHeight = UIScreen.main.bounds.height
 
 class ViewController: UIViewController {
+    var selectedView: RandomColorView?
+    
     class Label: UILabel {
         var zz_width = 0
         var zz_height = 0
@@ -28,18 +30,6 @@ class ViewController: UIViewController {
         override func layoutSubviews() {
             super.layoutSubviews()
             
-            return
-            let realWidth = Int(self.bounds.width)
-            let realHeight = Int(self.bounds.height)
-            
-            if tag == 1 || (realWidth == zz_width && realHeight == zz_height) {
-                return
-            }
-            
-            tag = 1
-            var text = self.text ?? ""
-            text += "偏\(Int(self.bounds.width) - zz_width)x\(Int(self.bounds.height) - zz_height)"
-            self.text = text
         }
     }
     
@@ -71,8 +61,9 @@ class ViewController: UIViewController {
         minWidth: CGFloat = kScreenWidth * 0.12,
         maxHeight: CGFloat = kScreenWidth * 0.12,
         minHeight: CGFloat = kScreenWidth * 0.06
-    ) -> UIView {
-        let view = UIView()
+    ) -> RandomColorView {
+        let view = RandomColorView()
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickView)))
         
         let w = maxWidth - minWidth
         let h = maxHeight - minHeight
@@ -83,7 +74,6 @@ class ViewController: UIViewController {
         let label = getTitleLabel("\(width)x\(height)")
         label.zz_width = width
         label.zz_height = height
-        label.backgroundColor = .randomColor
         label.textAlignment = .center
         view.addSubview(label)
         label.snp.makeConstraints{
@@ -101,7 +91,7 @@ class ViewController: UIViewController {
         minHeight: CGFloat = kScreenWidth * 0.06
     ) -> [UIView] {
         let views = (0..<count).compactMap {
-            index -> UIView in
+            index -> RandomColorView in
             return getOneRandomSizeView(maxWidth: maxWidth, minWidth: minWidth, maxHeight: maxHeight, minHeight: minHeight)
         }
         return views
@@ -116,18 +106,61 @@ class ViewController: UIViewController {
         return scrollView
     }()
     
-    let view0 = RandomColorView()
-    let view1 = RandomColorView()
-    let view2 = RandomColorView()
-    let view3 = RandomColorView()
-    let view4 = RandomColorView()
+    lazy var view0: RandomColorView = {
+        let view = RandomColorView()
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickView)))
+        return view
+    }()
+    lazy var view1: RandomColorView = {
+        let view = RandomColorView()
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickView)))
+        return view
+    }()
+    lazy var view2: RandomColorView = {
+        let view = RandomColorView()
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickView)))
+        return view
+    }()
+    lazy var view3: RandomColorView = {
+        let view = RandomColorView()
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickView)))
+        return view
+    }()
+    lazy var view4: RandomColorView = {
+        let view = RandomColorView()
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickView)))
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem.init(title: "Plus", style: .done, target: self, action: #selector(plus)),
+            UIBarButtonItem.init(title: "Reduce", style: .done, target: self, action: #selector(reduce))
+        ]
     }
     
+    var padding: CGFloat = 0
+    
+    @objc
+    func plus() {
+        
+    }
+    
+    @objc
+    func reduce() {
+        
+    }
+    
+    @objc
+    func clickView(_ ges: UIGestureRecognizer) {
+        guard let view = ges.view as? RandomColorView else { return }
+        self.selectedView?.isSelected = false
+        self.selectedView = view
+        view.isSelected = true
+    }
     
 }
 

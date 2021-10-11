@@ -104,11 +104,21 @@ struct ZZSnapMutipleViewSetup {
     }
     
     class FlexView: UIView, ZZSnapMutipleViewSetupFlex {
+        var topConstraint: Constraint?
+        var bottomConstraint: Constraint?
+        var leftConstraint: Constraint?
+        var rightConstraint: Constraint?
+        
         var insets: ZZSnapMutipleViewSetup.Insets = .zero
         var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
         var zz_contentView: UIView?
     }
     class SpaceView: UIView, ZZSnapMutipleViewSetupSpace {
+        var topConstraint: Constraint?
+        var bottomConstraint: Constraint?
+        var leftConstraint: Constraint?
+        var rightConstraint: Constraint?
+        
         var isIgnore: Bool = true
         var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
         var insets: ZZSnapMutipleViewSetup.Insets = .zero
@@ -117,13 +127,29 @@ struct ZZSnapMutipleViewSetup {
         var zz_height: CGFloat?
     }
     class AlignmentView: UIView, ZZSnapMutipleViewSetupAlignment {
+        var topConstraint: Constraint?
+        var bottomConstraint: Constraint?
+        var leftConstraint: Constraint?
+        var rightConstraint: Constraint?
+        
         var insets: ZZSnapMutipleViewSetup.Insets = .zero
         var zz_contentView: UIView?
         var alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
     }
 }
 
-protocol ZZSnapMutipleViewSetupContain: UIView {
+protocol ZZSnapMutipleViewSetupConstraint: UIView{
+    var topConstraint: Constraint? {set get}
+    var bottomConstraint: Constraint? {set get}
+    var leftConstraint: Constraint? {set get}
+    var rightConstraint: Constraint? {set get}
+}
+
+extension ZZSnapMutipleViewSetupConstraint{
+    
+}
+
+protocol ZZSnapMutipleViewSetupContain: ZZSnapMutipleViewSetupConstraint {
     var zz_contentView: UIView? {set get}
     var insets: ZZSnapMutipleViewSetup.Insets {set get}
     func setup()

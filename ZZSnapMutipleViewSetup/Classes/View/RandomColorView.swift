@@ -7,8 +7,23 @@
 
 import UIKit
 
-class RandomColorView: UIView {
-
+class RandomColorView: UIView, ZZSnapMutipleViewSetupConstraint {
+    var topConstraint: Constraint?
+    var bottomConstraint: Constraint?
+    var leftConstraint: Constraint?
+    var rightConstraint: Constraint?
+        
+    var isSelected = false{
+        didSet{
+            if isSelected {
+                self.layer.borderWidth = 4
+                self.layer.borderColor = UIColor.randomColor.cgColor
+            } else {
+                self.layer.borderWidth = 0
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

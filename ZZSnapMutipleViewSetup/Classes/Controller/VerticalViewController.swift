@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class VerticalViewController: ViewController {
     
@@ -33,7 +34,14 @@ class VerticalViewController: ViewController {
             maxHeight: 50,
             minHeight: 20
         )
-        views0[2] = .zz_alignmentContainView(views0[2], alignments: .right(10), .top(), .bottom())
+        let contentView = views0[2]
+        contentView.gestureRecognizers?.forEach({ ges in
+            contentView.removeGestureRecognizer(ges)
+        })
+        
+        let containView = UIView.zz_alignmentContainView(getOneRandomSizeView(), alignments: .right(10))
+        containView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickView(_:))))
+        views0[2] = containView
         
         view0.zz_setupSubViews(
             views0,
@@ -42,8 +50,9 @@ class VerticalViewController: ViewController {
             .verticalSpace(5)
         )
         
+        let views1 = getRandomSizeViews(count: 5, maxWidth: kScreenWidth * 0.5, minWidth: kScreenWidth * 0.25, maxHeight: 50, minHeight: 20)
         view1.zz_setupSubViews(
-            getRandomSizeViews(count: 5, maxWidth: kScreenWidth * 0.5, minWidth: kScreenWidth * 0.25, maxHeight: 50, minHeight: 20),
+            views1,
             .showType(.vertical),
             .alignment(.center(0))
         )
@@ -55,5 +64,23 @@ class VerticalViewController: ViewController {
         )
         
     }
+        
+    @objc
+    override func plus() {
+        padding += 20
+        UIView.animate(withDuration: 0.25) {
+            self.selectedView?.rightConstraint?.update(offset: self.padding)
+            self.scrollView.layoutIfNeeded()
+        }
+    }
     
+    @objc
+    override func reduce() {
+        padding -= 20
+        UIView.animate(withDuration: 0.25) {
+            self.selectedView?.rightConstraint?.update(offset: self.padding)
+            self.scrollView.layoutIfNeeded()
+        }
+    }
 }
+

@@ -261,6 +261,10 @@ extension UIView{
         for (index, subView) in subViews.enumerated() {
             addSubview(subView)
             
+            let constraintView = (subView as? ZZSnapMutipleViewSetupConstraint)
+            var topConstraint: Constraint?
+            var bottomConstraint: Constraint?
+
             if let scrollView = subView as? UIScrollView {
                 scrollView.snp.makeConstraints { make in
                     make.width.equalToSuperview().offset(0).priority(.high)
@@ -270,22 +274,22 @@ extension UIView{
             
             if index == 0 {
                 subView.snp.makeConstraints { (m) in
-                    m.top.equalToSuperview().inset(insets?.top ?? 0)
+                    topConstraint = m.top.equalToSuperview().inset(insets?.top ?? 0).constraint
                 }
             }else {
                 subView.snp.makeConstraints { (m) in
-                    m.top.equalTo(top).offset(space ?? 0)
+                    topConstraint = m.top.equalTo(top).offset(space ?? 0).constraint
                 }
             }
             
             if index == subViews.count - 1{
                 if let bottom = insets?.bottom {
                     subView.snp.makeConstraints { (m) in
-                        m.bottom.equalToSuperview().inset(bottom).priority(bottomPriority)
+                        bottomConstraint = m.bottom.equalToSuperview().inset(bottom).priority(bottomPriority).constraint
                     }
                 }else{
                     subView.snp.makeConstraints { (m) in
-                        m.bottom.equalToSuperview().priority(bottomPriority)
+                        bottomConstraint = m.bottom.equalToSuperview().priority(bottomPriority).constraint
                     }
                 }
                 
@@ -321,6 +325,9 @@ extension UIView{
             }else{
                 top = subView.snp.bottom
             }
+            
+            constraintView?.topConstraint = topConstraint
+            constraintView?.bottomConstraint = bottomConstraint
         }
     }
     
@@ -358,6 +365,10 @@ extension UIView{
         for (index, subView) in subViews.enumerated() {
             addSubview(subView)
             
+            let constraintView = (subView as? ZZSnapMutipleViewSetupConstraint)
+            var leftConstraint: Constraint?
+            var rightConstraint: Constraint?
+
             if let scrollView = subView as? UIScrollView {
                 scrollView.snp.makeConstraints { make in
                     make.height.equalToSuperview().offset(0).priority(.high)
@@ -367,22 +378,22 @@ extension UIView{
             
             if index == 0 {
                 subView.snp.makeConstraints { (m) in
-                    m.left.equalToSuperview().offset((insets?.left ?? 0))
+                    leftConstraint = m.left.equalToSuperview().offset((insets?.left ?? 0)).constraint
                 }
             }else {
                 subView.snp.makeConstraints { (m) in
-                    m.left.equalTo(left).offset(space ?? 0)
+                    leftConstraint = m.left.equalTo(left).offset(space ?? 0).constraint
                 }
             }
             
             if index == subViews.count - 1{
                 if let right = insets?.right {
                     subView.snp.makeConstraints { (m) in
-                        m.right.equalToSuperview().inset(right).priority(rightPriority)
+                        rightConstraint = m.right.equalToSuperview().inset(right).priority(rightPriority).constraint
                     }
                 }else{
                     subView.snp.makeConstraints { (m) in
-                        m.right.equalToSuperview().priority(rightPriority)
+                        rightConstraint = m.right.equalToSuperview().priority(rightPriority).constraint
                     }
                 }
                 
@@ -409,7 +420,7 @@ extension UIView{
                     }
                 }
                 spaceView.snp.makeConstraints { (m) in
-                    m.left.equalTo(subView.snp_right)
+                    m.left.equalTo(subView.snp.right)
                     m.centerY.equalToSuperview()
                     m.top.equalToSuperview()
                 }
@@ -417,6 +428,9 @@ extension UIView{
             }else{
                 left = subView.snp.right
             }
+            
+            constraintView?.leftConstraint = leftConstraint
+            constraintView?.rightConstraint = rightConstraint
         }
     }
     
@@ -446,6 +460,13 @@ extension UIView{
         var bottomPadding: CGFloat = insets?.bottom ?? .zero
         var rightPadding: CGFloat = insets?.right ?? .zero
         var leftPadding: CGFloat = insets?.left ?? .zero
+        
+        
+        let constraintView = (subView as? ZZSnapMutipleViewSetupConstraint)
+        var leftConstraint: Constraint?
+        var rightConstraint: Constraint?
+        var topConstraint: Constraint?
+        var bottomConstraint: Constraint?
         
         for alignment in alignments {
             switch alignment {
@@ -478,7 +499,7 @@ extension UIView{
                     topPadding += padding
                     
                     subView.snp.makeConstraints { (m) in
-                        m.top.equalToSuperview().inset(topPadding).priority(alignmentPriority)
+                        topConstraint = m.top.equalToSuperview().inset(topPadding).priority(alignmentPriority).constraint
                     }
                     
                     if let scrollView = subView as? UIScrollView {
@@ -497,7 +518,7 @@ extension UIView{
                     bottomPadding += padding
                     
                     subView.snp.makeConstraints { (m) in
-                        m.bottom.equalToSuperview().inset(bottomPadding).priority(alignmentPriority)
+                        bottomConstraint = m.bottom.equalToSuperview().inset(bottomPadding).priority(alignmentPriority).constraint
                     }
                     
                     if let scrollView = subView as? UIScrollView {
@@ -531,7 +552,7 @@ extension UIView{
                 }else{
                     leftPadding += padding
                     subView.snp.makeConstraints { (m) in
-                        m.left.equalToSuperview().inset(leftPadding).priority(alignmentPriority)
+                        leftConstraint = m.left.equalToSuperview().inset(leftPadding).priority(alignmentPriority).constraint
                     }
                     if let scrollView = subView as? UIScrollView {
                         scrollView.contentSize.width += leftPadding
@@ -548,7 +569,7 @@ extension UIView{
                     rightPadding += padding
                     
                     subView.snp.makeConstraints { (m) in
-                        m.right.equalToSuperview().inset(rightPadding).priority(alignmentPriority)
+                        rightConstraint = m.right.equalToSuperview().inset(rightPadding).priority(alignmentPriority).constraint
                     }
                     
                     if let scrollView = subView as? UIScrollView {
@@ -570,8 +591,8 @@ extension UIView{
                 if centerAlignment == nil {
                     if leftAlignment == nil, rightAlignment == nil {
                         subView.snp.makeConstraints { make in
-                            make.left.equalToSuperview().inset(leftPadding).priority(alignmentPriority)
-                            make.right.equalToSuperview().inset(rightPadding).priority(alignmentPriority)
+                            leftConstraint = make.left.equalToSuperview().inset(leftPadding).priority(alignmentPriority).constraint
+                            rightConstraint = make.right.equalToSuperview().inset(rightPadding).priority(alignmentPriority).constraint
                         }
                     }
                 }
@@ -579,14 +600,18 @@ extension UIView{
                 if centerAlignment == nil {
                     if topAlignment == nil, bottomAlignment == nil {
                         subView.snp.makeConstraints { make in
-                            make.bottom.equalToSuperview().inset(bottomPadding).priority(alignmentPriority)
-                            make.top.equalToSuperview().inset(topPadding).priority(alignmentPriority)
+                            bottomConstraint = make.bottom.equalToSuperview().inset(bottomPadding).priority(alignmentPriority).constraint
+                            topConstraint = make.top.equalToSuperview().inset(topPadding).priority(alignmentPriority).constraint
                         }
                     }
                 }
             }
-            
         }
+        
+        constraintView?.topConstraint = topConstraint
+        constraintView?.rightConstraint = rightConstraint
+        constraintView?.bottomConstraint = bottomConstraint
+        constraintView?.leftConstraint = leftConstraint
     }
     
     

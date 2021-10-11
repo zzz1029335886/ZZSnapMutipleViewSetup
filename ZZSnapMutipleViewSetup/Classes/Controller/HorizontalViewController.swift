@@ -48,4 +48,22 @@ class HorizontalViewController: ViewController {
         )
     }
     
+    @objc
+    override func plus() {
+        padding += 20
+        UIView.animate(withDuration: 0.25) {
+            self.selectedView?.leftConstraint?.update(offset: self.padding)
+            self.scrollView.layoutIfNeeded()
+        }
+    }
+    
+    @objc
+    override func reduce() {
+        padding -= 20
+        UIView.animate(withDuration: 0.25) {
+            self.selectedView?.leftConstraint?.update(offset: self.padding)
+            self.scrollView.layoutIfNeeded()
+        }
+    }
+    
 }
