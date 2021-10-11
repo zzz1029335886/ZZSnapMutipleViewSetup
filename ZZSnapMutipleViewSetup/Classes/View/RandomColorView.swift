@@ -8,10 +8,10 @@
 import UIKit
 
 class RandomColorView: UIView, ZZSnapMutipleViewSetupConstraint {
-    var topConstraint: Constraint?
-    var bottomConstraint: Constraint?
-    var leftConstraint: Constraint?
-    var rightConstraint: Constraint?
+    var zz_topConstraint: Constraint?
+    var zz_bottomConstraint: Constraint?
+    var zz_leftConstraint: Constraint?
+    var zz_rightConstraint: Constraint?
         
     var isSelected = false{
         didSet{

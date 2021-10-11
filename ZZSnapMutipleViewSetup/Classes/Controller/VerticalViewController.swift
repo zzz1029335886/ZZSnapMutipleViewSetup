@@ -69,7 +69,7 @@ class VerticalViewController: ViewController {
     override func plus() {
         padding += 20
         UIView.animate(withDuration: 0.25) {
-            self.selectedView?.rightConstraint?.update(offset: self.padding)
+            self.selectedView?.zz_rightConstraint?.update(offset: self.padding)
             self.scrollView.layoutIfNeeded()
         }
     }
@@ -78,7 +78,7 @@ class VerticalViewController: ViewController {
     override func reduce() {
         padding -= 20
         UIView.animate(withDuration: 0.25) {
-            self.selectedView?.rightConstraint?.update(offset: self.padding)
+            self.selectedView?.zz_rightConstraint?.update(offset: self.padding)
             self.scrollView.layoutIfNeeded()
         }
     }

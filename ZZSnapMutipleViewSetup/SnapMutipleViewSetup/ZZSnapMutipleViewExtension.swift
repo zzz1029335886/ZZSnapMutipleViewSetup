@@ -326,8 +326,8 @@ extension UIView{
                 top = subView.snp.bottom
             }
             
-            constraintView?.topConstraint = topConstraint
-            constraintView?.bottomConstraint = bottomConstraint
+            constraintView?.zz_topConstraint = topConstraint
+            constraintView?.zz_bottomConstraint = bottomConstraint
         }
     }
     
@@ -429,8 +429,8 @@ extension UIView{
                 left = subView.snp.right
             }
             
-            constraintView?.leftConstraint = leftConstraint
-            constraintView?.rightConstraint = rightConstraint
+            constraintView?.zz_leftConstraint = leftConstraint
+            constraintView?.zz_rightConstraint = rightConstraint
         }
     }
     
@@ -608,10 +608,10 @@ extension UIView{
             }
         }
         
-        constraintView?.topConstraint = topConstraint
-        constraintView?.rightConstraint = rightConstraint
-        constraintView?.bottomConstraint = bottomConstraint
-        constraintView?.leftConstraint = leftConstraint
+        constraintView?.zz_topConstraint = topConstraint
+        constraintView?.zz_rightConstraint = rightConstraint
+        constraintView?.zz_bottomConstraint = bottomConstraint
+        constraintView?.zz_leftConstraint = leftConstraint
     }
     
     
@@ -626,13 +626,13 @@ extension UIView{
         
         if let containView = subView as? ZZSnapMutipleViewSetupContain{
             isBool = true
-            containView.setup()
+            containView.zz_setup()
         }
         
         if let alignmentView = subView as? ZZSnapMutipleViewSetupAlignment {
-            if !alignmentView.alignments.isEmpty {
+            if !alignmentView.zz_alignments.isEmpty {
                 isBool = true
-                zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView, alignmentPriority: alignmentPriority)
+                zz_setupSubViewAlignments(alignmentView, alignments: alignmentView.zz_alignments, isVertical: isVertical, isMustAlignment: true,  lastFlexView: &lastFlexView, alignmentPriority: alignmentPriority)
             }
         }
         
@@ -664,7 +664,7 @@ extension UIView{
         }
         
         if let spaceView = subView as? ZZSnapMutipleViewSetupSpace{
-            isBool = spaceView.isIgnore
+            isBool = spaceView.zz_isIgnore
             if let zz_width = spaceView.zz_width {
                 spaceView.snp.makeConstraints { make in
                     make.width.equalTo(zz_width)
