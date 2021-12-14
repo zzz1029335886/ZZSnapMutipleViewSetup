@@ -19,9 +19,11 @@ class HorizontalViewController: ViewController {
                 getTitleLabel("中对齐").zz_alignmentView(alignments: .insets(.init(horizontal: 10, vertical: 10))).zz_spaceView(width: nil, height: 100),
                 view1,
                 getTitleLabel("上对齐20"),
-                view2
+                view2,
+                getTitleLabel("Between"),
+                view3,
             ],
-            .showType(.horizontal),
+            .showType(.vertical),
             .alignment(.top())
         )
         
@@ -39,11 +41,18 @@ class HorizontalViewController: ViewController {
             .horizontalSpace(8),
             .height(100)
         )
-                
+        
         view2.zz_setupSubViews(
             getRandomSizeViews(count: 3, maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 70, minHeight: 30),
             .showType(.horizontal),
             .alignment(.top(20)),
+            .height(100)
+        )
+        
+        view3.zz_setupSubViews(
+            getRandomSizeViews(count: 3, maxWidth: kScreenWidth * 0.25, minWidth: kScreenWidth * 0.125, maxHeight: 70, minHeight: 30),
+            .showType(.horizontal),
+            .alignment(.center()),
             .height(100)
         )
     }

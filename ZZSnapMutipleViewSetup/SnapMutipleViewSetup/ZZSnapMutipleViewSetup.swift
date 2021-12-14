@@ -101,6 +101,7 @@ struct ZZSnapMutipleViewSetup {
         /// Key constraints that determine width and height
         case keyPriority(_ keyPriority: ConstraintPriority)
         
+        case between
     }
     
     class FlexView: UIView, ZZSnapMutipleViewSetupFlex {
@@ -110,7 +111,7 @@ struct ZZSnapMutipleViewSetup {
         var zz_rightConstraint: Constraint?
         
         var zz_insets: ZZSnapMutipleViewSetup.Insets = .zero
-        var zz_alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = []
+        var zz_alignments: [ZZSnapMutipleViewSetup.Style.Alignment] = [.center()]
         var zz_contentView: UIView?
     }
     class SpaceView: UIView, ZZSnapMutipleViewSetupSpace {
@@ -331,7 +332,7 @@ extension UIView{
     ///   - styles: style
     static func zz_getViewWithSubViews(_ views: [UIView], _ styles: ZZSnapMutipleViewSetup.Style...) -> UIView{
         let view = UIView()
-        view.zz_setupSubViews(views, styles: [.insetsModel(insets: .init(all: .zero))] + styles)
+        view.zz_setupSubViews(views, styles: styles)
         return view
     }
     

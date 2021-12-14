@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2AB07149279705D8B514CFC /* Pods_ZZSnapMutipleViewSetup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0DC728C3A696FB9A52DE78A /* Pods_ZZSnapMutipleViewSetup.framework */; };
+		C42A2B69276889E500B65FC5 /* BetweenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42A2B68276889E500B65FC5 /* BetweenViewController.swift */; };
 		D47F830D270596D700BA589D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F830C270596D700BA589D /* AppDelegate.swift */; };
 		D47F8311270596D700BA589D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47F8310270596D700BA589D /* ViewController.swift */; };
 		D47F8316270596DB00BA589D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47F8315270596DB00BA589D /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		AC9A0413FE379D5D72B1774C /* Pods-ZZSnapMutipleViewSetup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZZSnapMutipleViewSetup.release.xcconfig"; path = "Target Support Files/Pods-ZZSnapMutipleViewSetup/Pods-ZZSnapMutipleViewSetup.release.xcconfig"; sourceTree = "<group>"; };
 		C0DC728C3A696FB9A52DE78A /* Pods_ZZSnapMutipleViewSetup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZZSnapMutipleViewSetup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C42A2B68276889E500B65FC5 /* BetweenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetweenViewController.swift; sourceTree = "<group>"; };
 		D47F8309270596D700BA589D /* ZZSnapMutipleViewSetup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZZSnapMutipleViewSetup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47F830C270596D700BA589D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D47F8310270596D700BA589D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				D4C3E6B127071DA10060EF7F /* ScrollVerticalViewController.swift */,
 				D47F837E2706292F00BA589D /* WidgetViewController.swift */,
 				D47F83802706368900BA589D /* MoreViewController.swift */,
+				C42A2B68276889E500B65FC5 /* BetweenViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				D47F836F2705AEA000BA589D /* TableListItem.swift in Sources */,
 				D4C3E6C9270761C30060EF7F /* ScrollViewController.swift in Sources */,
 				D47F837F2706292F00BA589D /* WidgetViewController.swift in Sources */,
+				C42A2B69276889E500B65FC5 /* BetweenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

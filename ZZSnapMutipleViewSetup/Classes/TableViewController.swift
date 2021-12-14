@@ -18,6 +18,7 @@ class TableViewController: UITableViewController {
         TableListItem(name: "Scroll", controllerClass: ScrollViewController.self),
         TableListItem(name: "ScrollHorizontal", controllerClass: ScrollHorizontalViewController.self),
         TableListItem(name: "ScrollVertical", controllerClass: ScrollVerticalViewController.self),
+//        TableListItem(name: "Between", controllerClass: BetweenViewController.self),
     ]
     
     override func viewDidLoad() {
