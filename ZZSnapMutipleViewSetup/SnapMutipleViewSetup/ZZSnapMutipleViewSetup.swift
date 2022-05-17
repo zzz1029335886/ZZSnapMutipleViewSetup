@@ -101,7 +101,7 @@ struct ZZSnapMutipleViewSetup {
         /// Key constraints that determine width and height
         case keyPriority(_ keyPriority: ConstraintPriority)
         
-        case between
+//        case between
     }
     
     class FlexView: UIView, ZZSnapMutipleViewSetupFlex {
